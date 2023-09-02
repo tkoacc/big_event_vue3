@@ -1,12 +1,16 @@
-<script setup></script>
+<script setup>
+import { useUserStore } from '@/stores'
+
+const userStore = useUserStore()
+</script>
 
 <template>
   <div>
-    <el-button type="primary">Primary</el-button>
-    <el-button type="success">Success</el-button>
-    <el-button type="info">Info</el-button>
-    <el-button type="warning">Warning</el-button>
-    <el-button type="danger">Danger</el-button>
+    <div>{{ userStore.token }}</div>
+    <el-button @click="userStore.setToken('Bearer asdffghh')" type="success"
+      >login</el-button
+    >
+    <el-button @click="userStore.removeToken()" type="danger">logout</el-button>
   </div>
 </template>
 
