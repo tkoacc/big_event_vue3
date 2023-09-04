@@ -6,6 +6,8 @@ const userStore = useUserStore()
 
 <template>
   <div>
+    <router-view></router-view>
+    <hr />
     <div>{{ userStore.token }}</div>
     <el-button @click="userStore.setToken('Bearer asdffghh')" type="success"
       >login</el-button
