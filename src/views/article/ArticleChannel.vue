@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import { Edit, Delete } from '@element-plus/icons-vue'
-import { artGetChannelsService } from '../../api/article'
+import { artGetChannelsService, artDelChannelsService } from '../../api/article'
 import ChannelEdit from './components/ChannelEdit.vue'
 const channelList = ref([])
 const loading = ref(false)
@@ -13,14 +13,24 @@ const getChannelList = async () => {
   loading.value = false
 }
 getChannelList()
-const onDeleteChannel = (row, $index) => {
-  console.log(row, $index)
+const onDeleteChannel = async (row) => {
+  await ElMessageBox.confirm('Are you sure to delete?', 'delete', {
+    type: 'warning',
+    confirmButtonText: 'confirm',
+    cancelButtonText: 'cancel'
+  })
+  await artDelChannelsService(row.id)
+  ElMessage.success('删除成功')
+  getChannelList()
 }
 const onEditChannel = (row) => {
   dialog.value.open(row)
 }
 const onAddChannel = () => {
   dialog.value.open({})
+}
+const onSuccess = () => {
+  getChannelList()
 }
 </script>
 
@@ -57,7 +67,7 @@ const onAddChannel = () => {
         <el-empty description="no data"></el-empty>
       </template>
     </el-table>
-    <channel-edit ref="dialog"></channel-edit>
+    <channel-edit ref="dialog" @success="onSuccess"></channel-edit>
   </page-container>
 </template>
 
