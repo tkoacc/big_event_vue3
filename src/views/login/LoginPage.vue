@@ -202,12 +202,11 @@ watch(isRegister, () => {
 
 <style lang="scss" scoped>
 .login-page {
+  color: #8a2763;
   height: 100vh;
-  background-color: #fff;
+  background-color: rgba(217, 159, 223, 0.3);
   .bg {
-    background:
-      // url('@/assets/logo2.png') no-repeat 60% center / 240px auto,
-      url('@/assets/login_bg1.jpg') no-repeat center -70px / cover;
+    background: url('@/assets/login_bg1.jpg') no-repeat center -70px / cover;
     border-radius: 0 20px 20px 0;
   }
   .form {
@@ -220,11 +219,17 @@ watch(isRegister, () => {
     }
     .button {
       width: 100%;
+      background-color: #8a2763;
+      border: none;
+      color: #f0e2f5;
     }
     .flex {
       width: 100%;
       display: flex;
       justify-content: space-between;
+    }
+    .el-link {
+      color: #8a2763;
     }
   }
 }
