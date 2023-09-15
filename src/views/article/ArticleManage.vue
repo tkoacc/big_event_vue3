@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 import { Edit, Delete } from '@element-plus/icons-vue'
 import ChannelSelect from './components/ChannelSelect.vue'
-import { artGetListService } from '@/api/article'
+import { artGetListService, artDelService } from '@/api/article'
 import { formatDate } from '@/utils/format'
 import ArticleEdit from './components/ArticleEdit.vue'
 const articleList = ref([])
@@ -57,8 +57,15 @@ const onSuccess = (type) => {
   getArticleList()
 }
 // delete function
-const onDeleteArticle = (row) => {
-  console.log(row)
+const onDeleteArticle = async (row) => {
+  await ElMessageBox.confirm('Are you sure to delete this article?', 'delete', {
+    type: 'warning',
+    confirmButtonText: 'confirm',
+    cancelButtonText: 'cancel'
+  })
+  await artDelService(row.id)
+  ElMessage.success('delete success')
+  getArticleList()
 }
 // pagination handle
 const handleSizeChange = (val) => {
