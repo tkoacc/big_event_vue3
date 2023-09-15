@@ -46,6 +46,16 @@ const onAddArticle = () => {
 const onEditArticle = (row) => {
   articleEditRef.value.open(row)
 }
+// callback function for successful add or edit
+const onSuccess = (type) => {
+  if (type === 'add') {
+    // render the last page
+    const lastPage = Math.ceil((total.value + 1) / params.value.pagesize)
+    // update the last page
+    params.value.pagenum = lastPage
+  }
+  getArticleList()
+}
 // delete function
 const onDeleteArticle = (row) => {
   console.log(row)
@@ -129,7 +139,7 @@ const handleCurrentChange = (val) => {
       @current-change="handleCurrentChange"
     />
     <!-- drawer -->
-    <article-edit ref="articleEditRef"></article-edit>
+    <article-edit ref="articleEditRef" @success="onSuccess"></article-edit>
   </page-container>
 </template>
 
