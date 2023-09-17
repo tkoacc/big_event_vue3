@@ -1,4 +1,5 @@
 <script setup>
+import PageContainer from '@/components/PageContainer.vue'
 import { ref } from 'vue'
 import { Plus, Upload } from '@element-plus/icons-vue'
 // 基于store的数据，初始化imgUrl的值
